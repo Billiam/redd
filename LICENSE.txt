@@ -1,4 +1,4 @@
-Copyright (c) 2014 avinashd
+Copyright (c) 2014 Avinash Dwarapu
 
 MIT License
 

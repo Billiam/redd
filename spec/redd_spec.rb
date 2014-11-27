@@ -1,11 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Redd do
-  it 'should have a version number' do
-    Redd::VERSION.should_not be_nil
-  end
-
-  it 'should do something useful' do
-    false.should eq(true)
+  it "has a version number" do
+    expect(Redd::VERSION).not_to be nil
   end
 end
