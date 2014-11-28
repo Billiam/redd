@@ -26,6 +26,10 @@ module Redd
     #   @return [String] The time when the last request took place.
     attr_reader :last_request_time
 
+    # @!attribute [rw] gap
+    #   @return [Integer, Float] The minimum time between requests.
+    attr_accessor :gap
+
     # @param [Float, Integer] gap The minimum time between each request.
     def initialize(gap = 2)
       # Some time ages ago, because we never made a request.
@@ -39,11 +43,12 @@ module Redd
     # @yield A block.
     # @return The return value of the block.
     def after_limit
-      seconds_passed = Time.now - @last_request_time
-      wait_time = @gap - seconds_passed
+      wait_time = @last_request_time + @gap - Time.now
       sleep(wait_time) if wait_time > 0
+      response = yield
       @last_request_time = Time.now
-      yield
+
+      response
     end
   end
 end
