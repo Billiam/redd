@@ -1,15 +1,17 @@
+require "hashie/dash"
+
 module Redd
   module Objects
     # A reddit thing.
     # @see http://www.reddit.com/dev/api#fullnames
-    class Thing
+    class Thing < Hashie::Dash
       # @!attribute [r] id
       # @return [String] The id value for the thing.
-      attribute :id
+      property :id
 
       # @!attribute [r] kind
       # @return [String] The kind of the thing.
-      attr_reader :kind
+      property :kind
 
       # Check for equality.
       # @param other The other object.

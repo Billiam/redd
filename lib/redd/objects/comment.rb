@@ -1,37 +1,38 @@
-require "virtus"
+require_relative "thing"
 
 module Redd
   module Objects
-    class Comment
+    # A comment that can be made on a link.
+    class Comment < Thing
       # Creatable
-      attribute :author
+      property :author
 
       # Editable/Saveable/Gildable
-      attribute :edited
-      attribute :saved
-      attribute :gilded
+      property :edited
+      property :saved
+      property :gilded
 
       # Voteable
-      attribute :ups
-      attribute :downs
-      attribute :score
-      attribute :likes
-      attribute :controversiality
+      property :ups
+      property :downs
+      property :score
+      property :likes
+      property :controversiality
 
       # Moderateable
-      attribute :banned_by
-      attribute :approved_by
-      attribute :score_hidden
-      attribute :distinguished
-      attribute :num_reports
+      property :banned_by
+      property :approved_by
+      property :score_hidden
+      property :distinguished
+      property :num_reports
 
       # Commentable
-      attribute :parent_id
-      attribute :link_id
-      attribute :body
-      attribute :body_html
-      attribute :author_flair_text
-      attribute :author_flair_css_class
+      property :parent_id
+      property :link_id
+      property :body
+      property :body_html
+      property :author_flair_text
+      property :author_flair_css_class
 
       alias_method :reports_count, :num_reports
     end
