@@ -1,6 +1,7 @@
 require "faraday"
 require_relative "../response/raise_error"
 require_relative "../response/parse_json"
+require_relative "../rate_limit"
 
 module Redd
   # The possible clients that can be used.
@@ -20,7 +21,9 @@ module Redd
       attr_accessor :rate_limit
 
       def initialize(options)
-        options
+        @rate_limit = options[:rate_limit] || Redd::RateLimit.new
+        @user_agent = options[:user_agent] || "Redd/Ruby, v#{Redd::VERSION}"
+        @api_endpoint = options[:api_endpoint] || "https://www.reddit.com/"
       end
 
       private
