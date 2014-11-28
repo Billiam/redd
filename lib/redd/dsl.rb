@@ -30,7 +30,7 @@ module Redd
     # @param [String] password
     # @return [Redd::Clients::Client] The logged-in client.
     def login(username, password)
-      @client = Redd::Clients::Unauthenticated.new(username, password)
+      @client = Redd::Clients::Authenticated.new(username, password)
     end
 
     # @return [Boolean] If the current user is logged in.
