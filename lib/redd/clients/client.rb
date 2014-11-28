@@ -1,6 +1,7 @@
 require "faraday"
 require_relative "../response/raise_error"
 require_relative "../response/parse_json"
+require_relative "../version"
 require_relative "../rate_limit"
 
 module Redd
