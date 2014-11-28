@@ -1,6 +1,6 @@
 language: ruby
 rvm:
   - ruby-2
-  - ruby-2.0.0
+  - ruby-2.1.0
   - jruby-1.7
   - rbx-2

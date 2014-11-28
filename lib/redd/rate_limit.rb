@@ -31,7 +31,7 @@ module Redd
     attr_accessor :gap
 
     # @param [Float, Integer] gap The minimum time between each request.
-    def initialize(gap = 2)
+    def initialize(gap: 2)
       # Some time ages ago, because we never made a request.
       @last_request_time = Time.at(0)
       @gap = gap
