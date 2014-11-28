@@ -91,6 +91,16 @@ module Redd
           request(meth, path, params).body
         end
       end
+
+      # Helper method to require and include mixins.
+      # @param [*Symbol] names A list of modules to load.
+      def self.mixins(*names)
+        names.each do |name|
+          camel_case = name.split("_").map{|e| e.capitalize}.join
+          require_relative "#{self.class.name}/#{name}"
+          include const_get(camel_case)
+        end
+      end
     end
   end
 end
