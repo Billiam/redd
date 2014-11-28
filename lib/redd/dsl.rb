@@ -16,8 +16,6 @@ module Redd
   #   end
   module DSL
     class << self
-      private
-
       # Create or access the client.
       # @return [Redd::Clients::Client] The client.
       def client
