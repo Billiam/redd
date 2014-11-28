@@ -3,6 +3,7 @@ require_relative "clients/authenticated"
 
 module Redd
   # The DSL can can be implemented in any bot.
+  #
   # @example A Simple Example
   #   require "redd/dsl"
   #
@@ -13,7 +14,6 @@ module Redd
   #       login "username", "password"
   #     end
   #   end
-  #
   module DSL
     class << self
       private

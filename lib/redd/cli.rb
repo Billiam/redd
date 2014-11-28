@@ -13,13 +13,14 @@ module Redd
 
     desc "version", "provide current redd version"
     def version
-      puts "Redd, v#{Redd::VERSION}"
+      say "Redd, v#{Redd::VERSION}"
     end
 
     desc "create NAME", "create a project titled NAME"
     def create(name)
       @name = name
       directory("template", name)
+      say "Make sure to modify the .env file.", :yellow
     end
   end
 end

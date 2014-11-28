@@ -2,3 +2,10 @@ require "bundler"
 Bundler.require
 Dotenv.load
 
+class <%= name.capitalize %>
+  include Redd::DSL
+
+  def initialize
+    login ENV["USERNAME"], ENV["PASSWORD"]
+  end
+end
