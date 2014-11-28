@@ -2,6 +2,18 @@ require_relative "clients/unauthenticated"
 require_relative "clients/authenticated"
 
 module Redd
+  # The DSL can can be implemented in any bot.
+  # @example A Simple Example
+  #   require "redd/dsl"
+  #
+  #   class TestBot
+  #     include Redd::DSL
+  #
+  #     def initialize
+  #       login "username", "password"
+  #     end
+  #   end
+  #
   module DSL
     class << self
       private

@@ -2,6 +2,7 @@ require "thor"
 require_relative "version"
 
 module Redd
+  # The command line interface for generating and managing bots.
   class CLI < Thor
     include Thor::Actions
     attr_reader :name
