@@ -25,6 +25,31 @@ module Redd
 
       private
 
+      # @return [Hash{String => String}] A hash of headers.
+      def headers
+        @request ||= {"User-Agent" => @user_agent}
+      end
+
+      # @return [Faraday::RackBuilder] The middleware to use when creating the
+      #   connection.
+      def middleware
+        @middleware ||= Faraday::RackBuilder.new do |builder|
+          builder.use Faraday::Request::UrlEncoded
+          builder.use Redd::Response::RaiseError
+          builder.use Redd::Response::ParseJson
+          builder.adapter Faraday.default_adapter
+        end
+      end
+
+      # @return [Faraday::Connection] A new or existing connection.
+      def connection
+        @connection ||= Faraday::Connection.new(
+          url: api_endpoint,
+          headers: headers,
+          builder: middleware
+        )
+      end
+
       # Send a request to the given path.
       #
       # @param [#to_sym] method The HTTP verb to use.
@@ -43,36 +68,14 @@ module Redd
       # @!method put
       # @!method delete
       #
-      # Sends the request to the given path with the given params.
+      # Sends the request to the given path with the given params and return
+      # the body of the response.
       # @param path
       # @param params
       # @see #request
       [:get, :post, :put, :delete].each do |meth|
-        define_method(meth) { |path, params = nil| request(meth, path, params) }
-      end
-
-      # @return [Faraday::Connection] A new or existing connection.
-      def connection
-        @connection ||= Faraday::Connection.new(
-          url: api_endpoint,
-          headers: headers,
-          builder: middleware
-        )
-      end
-
-      # @return [Hash{String => String}] A hash of headers.
-      def headers
-        @request ||= {"User-Agent" => @user_agent}
-      end
-
-      # @return [Faraday::RackBuilder] The middleware to use when creating the
-      #   connection.
-      def middleware
-        @middleware ||= Faraday::RackBuilder.new do |builder|
-          builder.use Faraday::Request::UrlEncoded
-          builder.use Redd::Response::RaiseError
-          builder.use Redd::Response::ParseJson
-          builder.adapter Faraday.default_adapter
+        define_method(meth) do |path, params = nil|
+          request(meth, path, params).body
         end
       end
     end
