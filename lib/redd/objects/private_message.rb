@@ -1,7 +1,7 @@
 require_relative "thing"
 
 module Redd
-  module Object
+  module Objects
     # The model for private messages
     class PrivateMessage < Thing
       property :body

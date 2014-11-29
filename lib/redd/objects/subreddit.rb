@@ -1,7 +1,7 @@
 require_relative "thing"
 
 module Redd
-  module Object
+  module Objects
     # A comment made on links.
     class Subreddit < Thing
       property :display_name
