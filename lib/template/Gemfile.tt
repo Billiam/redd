@@ -1,0 +1,12 @@
+source "https://rubygems.org"
+ruby "<%= options[:ruby] %>"
+
+gem "redd", require: "redd/dsl"
+
+# Foreman is a great app runner that loads tasks from the Procfile and loads
+# environment variables from .env. You can launch your app by running:
+#
+# $ bundle exec foreman start
+#
+gem "foreman", group: :development
+
