@@ -14,7 +14,7 @@ Main changes include:
 * `Redd::Base` now inherits from `Hashie::Dash`.
 * A new DSL module that can be used like so:
 
-  ```  
+  ```ruby
   require "redd/dsl"
   include Redd::DSL
 
@@ -23,11 +23,10 @@ Main changes include:
   ```
 * A new CLI for creating bots quickly.
 
-  ```
-  $ redd create picturegamebot
+  ```shell
+  $ redd create picturegamebot --username Mustermind --password hunter2
     ...
   $ cd picturegamebot
-  $ redd start
-    Launching bot with foreman...
+  $ bundle exec foreman start
   ```
 * That's it so far. There might be more changes soon...
