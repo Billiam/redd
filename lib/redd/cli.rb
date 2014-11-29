@@ -2,25 +2,34 @@ require "thor"
 require_relative "version"
 
 module Redd
-  # The command line interface for generating and managing bots.
-  class CLI < Thor
-    include Thor::Actions
-    attr_reader :name
+  module CLI
+    class Create < Thor::Group
+      include Thor::Actions
 
-    def self.source_root
-      File.join(File.dirname(__FILE__), "../")
+      argument :name
+      class_option :username, aliases: ["-u"], default: "UPDATE_USERNAME"
+      class_option :password, aliases: ["-p"], default: "UPDATE_PASSWORD"
+
+      def self.source_root
+        File.join(File.dirname(__FILE__), "../")
+      end
+
+      def create
+        directory "template", name
+      end
     end
 
-    desc "version", "provide current redd version"
-    def version
-      say "Redd, v#{Redd::VERSION}"
-    end
+    # The command line interface for generating and managing bots.
+    class Main < Thor
+      include Thor::Actions
 
-    desc "create NAME", "create a project titled NAME"
-    def create(name)
-      @name = name
-      directory("template", name)
-      say "Make sure to modify the .env file.", :yellow
+      desc "version", "provide current redd version"
+      def version
+        say "Redd, v#{Redd::VERSION}"
+      end
+
+      register Create, "create", "create NAME", "create a project titled NAME"
+      tasks["create"].options = Create.class_options
     end
   end
 end
