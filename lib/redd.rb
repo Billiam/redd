@@ -6,7 +6,7 @@ require_relative "redd/clients/unauthenticated"
 module Redd
   def self.new(username = nil, password = nil)
     if username && password
-      Redd::Clients::Authenticated.new(username, password)
+      Redd::Clients::Unauthenticated.new.login(username, password)
     else
       Redd::Clients::Unauthenticated.new
     end
