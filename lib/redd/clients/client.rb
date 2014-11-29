@@ -95,8 +95,8 @@ module Redd
       # Helper method to require and include a mixin.
       # @param [Symbol] mixin_name A module to load.
       def self.mixin(mixin_name)
-        class_name = self.name.split("::").last.downcase
-        camel_case = mixin_name.to_s.split("_").map{|m| m.capitalize}.join
+        class_name = name.split("::").last.downcase
+        camel_case = mixin_name.to_s.split("_").map(&:capitalize).join
         require_relative "#{class_name}/#{mixin_name}"
         include const_get(camel_case)
       end
