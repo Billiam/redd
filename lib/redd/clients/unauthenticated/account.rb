@@ -19,7 +19,7 @@ module Redd
             rem: remember
           )
 
-          data = response.body[:json][:data]
+          data = response[:json][:data]
           Redd::Clients::Authenticated.new(
             data[:cookie],
             data[:modhash]
