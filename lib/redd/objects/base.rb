@@ -23,6 +23,8 @@ module Redd
 
       private
 
+      # @param [Symbol] new_name
+      # @param [Symbol] old_name
       def self.alias_property(new_name, old_name)
         define_method(new_name) { send(old_name) }
       end

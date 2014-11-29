@@ -11,7 +11,7 @@ which is the only other ruby wrapper still being worked on as far as I know.
 Main changes include:
 
 * Keyword arguments for some methods.
-* `Redd::Base` now inherits from `Hashie::Dash`.
+* Objects no longer have predefined properties.
 * A new DSL module that can be used like so:
 
   ```ruby
