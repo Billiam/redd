@@ -32,7 +32,7 @@ module Redd
       # @option options [String] :api_endpoint The main domain to connect
       #   to, in this case, the URL for reddit.
       def initialize(options = {})
-        @rate_limit = options[:rate_limit] || Redd::RateLimit.new
+        @rate_limit = options[:rate_limit] || RateLimit.new
         @user_agent = options[:user_agent] || "Redd/Ruby, v#{Redd::VERSION}"
         @api_endpoint = options[:api_endpoint] || "https://www.reddit.com/"
       end
@@ -72,7 +72,7 @@ module Redd
       #   send.
       # @return [Faraday::Response] The faraday response.
       def request(method, path, params = nil)
-        rate_limit.after_limit do
+        @rate_limit.after_limit do
           connection.send(method.to_sym, path, params)
         end
       end

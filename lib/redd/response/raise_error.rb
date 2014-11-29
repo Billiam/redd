@@ -9,8 +9,8 @@ module Redd
         @error = Redd::Error.from_response(env)
       end
 
-      def process_response(_)
-        fail @error if @error
+      def process_response(env)
+        fail @error.new(env) if @error
       end
     end
   end
