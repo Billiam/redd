@@ -6,22 +6,28 @@ versions of Ruby? Upgrading is pretty easy with
   [rvm](http://rvm.io).
 If you can't upgrade, check out
   [RedditKit.rb](https://github.com/samsymons/RedditKit.rb),
-which is the only other wrapper still being worked on as far as I know.
+which is the only other ruby wrapper still being worked on as far as I know.
 
 Main changes include:
 
-* keyword arguments for some methods.
-* Use of `Hashie::Dash` instead of `Redd::Base`
+* Keyword arguments for some methods.
+* `Redd::Base` now inherits from `Hashie::Dash`.
 * A new DSL module that can be used like so:
-      require "redd/dsl"
-      include Redd::DSL
-      
-      puts client.user_agent
-      login("Mustermind", "hunter2") unless logged_in?
+
+  ```  
+  require "redd/dsl"
+  include Redd::DSL
+
+  puts client.user_agent
+  login("Mustermind", "hunter2") unless logged_in?
+  ```
 * A new CLI for creating bots quickly.
-      $ redd create picturegamebot
-        ...
-      $ cd picturegamebot
-      $ redd start
-        Launching bot with foreman...
+
+  ```
+  $ redd create picturegamebot
+    ...
+  $ cd picturegamebot
+  $ redd start
+    Launching bot with foreman...
+  ```
 * That's it so far. There might be more changes soon...
