@@ -47,8 +47,8 @@ module Redd
 
     # @see http://git.io/KNmwIw
     def method_missing(meth, *args, &block)
-      return super unless @client.respond_to?(meth)
-      @client.send(meth, *args, &block)
+      return super unless client.respond_to?(meth)
+      client.send(meth, *args, &block)
     end
   end
 end
