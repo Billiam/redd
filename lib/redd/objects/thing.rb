@@ -17,7 +17,7 @@ module Redd
       # @param other The other object.
       # @return [Boolean]
       def ==(other)
-        other.is_a?(Redd::Thing) && full_name == other.full_name
+        other.is_a?(Thing) && full_name == other.full_name
       end
 
       # @return [String] The fullname of the thing.

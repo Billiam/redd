@@ -29,7 +29,7 @@ module Redd
         require "bundler"
         inside name do
           Bundler.with_clean_env do
-            output = `"#{Gem.ruby}" "#{_bundle_command}" install`
+            output = `"#{Gem.ruby}" "#{bundle_command}" install`
             print output
           end
         end
