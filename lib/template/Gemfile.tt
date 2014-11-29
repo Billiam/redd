@@ -1,5 +1,4 @@
 source "https://rubygems.org"
-ruby "<%= options[:ruby] %>"
 
 gem "redd", require: "redd/dsl"
 

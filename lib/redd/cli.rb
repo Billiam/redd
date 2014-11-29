@@ -11,7 +11,7 @@ module Redd
       argument :name
       class_option :username, aliases: ["-u"], default: "UPDATE_USERNAME"
       class_option :password, aliases: ["-p"], default: "UPDATE_PASSWORD"
-      class_option :ruby, aliases: ["-r"], default: "2.1"
+      class_option :ruby, aliases: ["-r"], default: RUBY_VERSION
 
       def self.source_root
         File.join(File.dirname(__FILE__), "../")
