@@ -4,5 +4,6 @@ before_install:
 rvm:
   - ruby-2
   - ruby-2.1.0
-  - jruby-1.7
   - rbx-2
+  # Uncomment when it is released.
+  # - jruby-9000
