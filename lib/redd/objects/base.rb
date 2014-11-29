@@ -1,6 +1,7 @@
 require "hashie/dash"
 
 module Redd
+  # A bunch of objects that can hold properties.
   module Objects
     # A base for all objects to inherit from
     class Base < Hashie::Dash

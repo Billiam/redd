@@ -3,7 +3,7 @@ require "hashie"
 require_relative "../../objects/thing"
 require_relative "../../objects/listing"
 require_relative "../../objects/comment"
-require_relative "../../objects/comment"
+require_relative "../../objects/user"
 
 module Redd
   module Objects

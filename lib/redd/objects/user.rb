@@ -20,7 +20,7 @@ module Redd
       alias_method :has_gold, :is_gold
 
       def created
-        @created ||= Time.at([:created_utc])
+        @created ||= Time.at(self[:created_utc])
       end
     end
   end

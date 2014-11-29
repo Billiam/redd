@@ -22,7 +22,7 @@ module Redd
 
       # @return [String] The fullname of the thing.
       def fullname
-        @fullname ||= "#{[:kind]}_#{[:id]}"
+        @fullname ||= "#{self[:kind]}_#{self[:id]}"
       end
     end
   end
