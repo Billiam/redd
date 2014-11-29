@@ -22,7 +22,14 @@ module Redd
 
       # @return [String] The fullname of the thing.
       def fullname
-        @fullname ||= "#{@kind}_#{@id}"
+        @fullname ||= "#{[:kind]}_#{[:id]}"
+      end
+
+      private
+
+      # There are some useless properties and there are seme
+      def assert_property_exists!(*)
+        nil
       end
     end
   end

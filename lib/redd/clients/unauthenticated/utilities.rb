@@ -1,7 +1,16 @@
+require "hashie"
+
 require_relative "../../objects/thing"
+require_relative "../../objects/listing"
+require_relative "../../objects/comment"
 require_relative "../../objects/comment"
 
 module Redd
+  module Objects
+    # A kind that represents one I haven't bothered implementing.
+    UnknownKind = Class.new(Hashie::Mash)
+  end
+
   module Clients
     class Unauthenticated
       # Non-API methods that make life easier.
@@ -13,17 +22,23 @@ module Redd
         #   object for a given kind or Redd::Objects::Thing if nothing is found.
         def object_from_kind(kind)
           objects = {
-            # "Listing"  => Redd::Objects::Listing,
-            # "wikipage" =>  Redd::Objects::WikiPage,
-            # "more"     => Redd::Objects::MoreComments,
-            "t1"       => Redd::Objects::Comment
-            # "t2"       => Redd::Objects::User,
-            # "t3"       => Redd::Objects::Submission,
-            # "t4"       => Redd::Objects::PrivateMessage,
-            # "t5"       => Redd::Objects::Subreddit
+            "Listing"  => Objects::Listing,
+            # "wikipage" =>  Objects::WikiPage,
+            # "more"     => Objects::MoreComments,
+            "t1"       => Objects::Comment,
+            "t2"       => Objects::User
+            # "t3"       => Objects::Submission,
+            # "t4"       => Objects::PrivateMessage,
+            # "t5"       => Objects::Subreddit
           }
 
-          objects.fetch(kind, Redd::Thing)
+          objects.fetch(kind, Objects::UnknownKind)
+        end
+
+        def objects_from_listing(listing)
+          listing[:data][:children].map do |child|
+            object_from_body(child)
+          end
         end
 
         # Create an object instance with the correct attributes when given a
@@ -36,25 +51,22 @@ module Redd
           return nil unless body.is_a?(Hash) && body.key?(:kind)
           object = object_from_kind(body[:kind])
 
-          if object == Redd::Object::Listing
+          if object == Redd::Objects::Listing
             object.new(
               children: objects_from_listing(body),
               before: body[:data][:before],
               after: body[:data][:after]
             )
           else
-            object.new(body)
+            contents = body[:data]
+            contents[:kind] = body[:kind]
+            object.new(contents)
           end
         end
 
-        def objects_from_listing(listing)
-          listing[:data][:children].map do |child|
-            object_from_body(child)
-          end
-        end
-
-        def request_object(response)
-          object_from_body(response.body)
+        def request_object(meth, path, params = nil)
+          body = request(meth, path, params).body
+          object_from_body(body)
         end
       end
     end

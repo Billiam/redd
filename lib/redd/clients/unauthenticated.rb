@@ -6,6 +6,7 @@ module Redd
     class Unauthenticated < Client
       mixin :utilities
       mixin :captcha
+      mixin :users
     end
   end
 end
