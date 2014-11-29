@@ -5,14 +5,6 @@ module Redd
     # A reddit thing.
     # @see http://www.reddit.com/dev/api#fullnames
     class Thing < Base
-      # @!attribute [r] id
-      # @return [String] The id value for the thing.
-      property :id
-
-      # @!attribute [r] kind
-      # @return [String] The kind of the thing.
-      property :kind
-
       # Check for equality.
       # @param other The other object.
       # @return [Boolean]

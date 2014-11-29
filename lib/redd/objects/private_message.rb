@@ -4,20 +4,8 @@ module Redd
   module Objects
     # The model for private messages
     class PrivateMessage < Thing
-      property :body
-      property :body_html
-      property :subreddit
-      property :parent_id
-      property :distinguished
-      property :was_comment
-      property :first_message_name
-      property :context
-
-      property :dest
-      property :author
-
-      alias_method :from, :author
-      alias_method :to, :dest
+      alias_property :from, :author
+      alias_property :to, :dest
 
       def created
         @created ||= Time.at(self[:created_utc])

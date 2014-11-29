@@ -1,5 +1,4 @@
-require "hashie"
-
+require_relative "../../objects/base"
 require_relative "../../objects/listing"
 require_relative "../../objects/comment"
 require_relative "../../objects/user"
@@ -29,7 +28,7 @@ module Redd
             "t5"       => Objects::Subreddit
           }
 
-          objects.fetch(kind, Hashie::Mash)
+          objects.fetch(kind, Objects::Base)
         end
 
         def objects_from_listing(listing)
