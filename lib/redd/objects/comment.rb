@@ -19,7 +19,7 @@ module Redd
       property :likes
       property :controversiality
 
-      # Moderateable
+      # Moderatable
       property :banned_by
       property :approved_by
       property :score_hidden

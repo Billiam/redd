@@ -1,16 +1,13 @@
 require "hashie"
 
-require_relative "../../objects/thing"
 require_relative "../../objects/listing"
 require_relative "../../objects/comment"
 require_relative "../../objects/user"
+require_relative "../../objects/submission"
+require_relative "../../objects/private_message"
+require_relative "../../objects/subreddit"
 
 module Redd
-  module Objects
-    # A kind that represents one I haven't bothered implementing.
-    UnknownKind = Class.new(Hashie::Mash)
-  end
-
   module Clients
     class Unauthenticated
       # Non-API methods that make life easier.
@@ -26,13 +23,13 @@ module Redd
             # "wikipage" =>  Objects::WikiPage,
             # "more"     => Objects::MoreComments,
             "t1"       => Objects::Comment,
-            "t2"       => Objects::User
-            # "t3"       => Objects::Submission,
-            # "t4"       => Objects::PrivateMessage,
-            # "t5"       => Objects::Subreddit
+            "t2"       => Objects::User,
+            "t3"       => Objects::Submission,
+            "t4"       => Objects::PrivateMessage,
+            "t5"       => Objects::Subreddit
           }
 
-          objects.fetch(kind, Objects::UnknownKind)
+          objects.fetch(kind, Hashie::Mash)
         end
 
         def objects_from_listing(listing)
