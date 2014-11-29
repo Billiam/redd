@@ -1,10 +1,10 @@
-require "hashie/dash"
+require_relative "base"
 
 module Redd
   module Objects
     # A reddit thing.
     # @see http://www.reddit.com/dev/api#fullnames
-    class Thing < Hashie::Dash
+    class Thing < Base
       # @!attribute [r] id
       # @return [String] The id value for the thing.
       property :id
