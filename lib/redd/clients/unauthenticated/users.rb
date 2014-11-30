@@ -5,7 +5,7 @@ module Redd
       module Users
         # Return a User object from the username of a redditor.
         # @param username [String] The username.
-        # @return [Redd::Object::User]
+        # @return [Redd::Objects::User]
         def user(username)
           request_object :get, "/user/#{username}/about.json"
         end

@@ -17,7 +17,7 @@ module Redd
         end
 
         # @param identifier [String] The captcha identifier.
-        # @return The url for the captcha image.
+        # @return [String] The url for the captcha image.
         def captcha_url(identifier)
           "http://www.reddit.com/captcha/#{identifier}.png"
         end
