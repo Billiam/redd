@@ -26,6 +26,14 @@ module Redd
       def self.alias_property(new_name, old_name)
         define_method(new_name) { send(old_name) }
       end
+
+      # Helper method to require and include a mixin.
+      # @param [Symbol] mixin_name A module to load.
+      def self.mixin(mixin_name)
+        camel_case = mixin_name.to_s.split("_").map(&:capitalize).join
+        require_relative "base/#{mixin_name}"
+        include Base.const_get(camel_case)
+      end
     end
   end
 end
