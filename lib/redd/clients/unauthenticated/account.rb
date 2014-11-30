@@ -13,7 +13,8 @@ module Redd
         #   returned cookie for a long time.
         def login(username, password, remember = false)
           response = post(
-            "/api/login", api_type: "json", user: username,
+            "/api/login",
+            api_type: "json", user: username,
             passwd: password, rem: remember
           )
 

@@ -1,3 +1,5 @@
+require "set"
+
 require_relative "../../objects/base"
 require_relative "../../objects/listing"
 require_relative "../../objects/comment"
@@ -11,6 +13,26 @@ module Redd
     class Unauthenticated
       # Non-API methods that make life easier.
       module Utilities
+        # A set which removes the first inserted element when the maximum is
+        # reached. This one totally implements the set interface.
+        #
+        # Similar to PRAW's implementation. (GPL license)
+        # @see http://git.io/uA8RVw
+        class BoundedOrderedSet < Set
+          attr_reader :limit
+
+          def initialize(limit = 10, enum = nil, &block)
+            @limit = limit
+            @fifo  = []
+            super(enum, &block)
+          end
+
+          def push(item)
+            remove(@fifo.shift) if size >= @limit
+            @fifo.push(item) if add?(item)
+          end
+        end
+
         private
 
         def get_property(object, property)
