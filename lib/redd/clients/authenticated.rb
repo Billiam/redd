@@ -20,13 +20,7 @@ module Redd
       #
       # @param [String] cookie The cookie to use when sending a request.
       # @param [String] modhash The modhash to use when sending a request.
-      # @param [Hash] options A hash of options to connect using.
-      # @option options [#after_limit] :rate_limit The handler that takes care
-      #   of rate limiting.
-      # @option options [String] :user_agent The User-Agent string to use in the
-      #   header of every request.
-      # @option options [String] :api_endpoint The main domain to connect to, in
-      #   this case, the URL for reddit.
+      # @param [Hash] **kwargs Keyword arguments to pass to the Client.
       # @see Client
       def initialize(cookie, modhash, **kwargs)
         @cookie = cookie
