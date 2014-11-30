@@ -5,7 +5,7 @@ module Redd
       module PrivateMessages
         # Block the sender of the message from sending any more.
         #
-        # @param message [Redd::Objects::PrivateMessage, String] The message
+        # @param [Redd::Objects::PrivateMessage, String] message The message
         #   whose sender to block.
         def block_message(message)
           fullname = get_property(message, :fullname)
@@ -14,13 +14,13 @@ module Redd
 
         # Compose a message to a person or the moderators of a subreddit.
         #
-        # @param to [Redd::Objects::User, Redd::Objects::Subreddit, String] The
+        # @param [Redd::Objects::User, Redd::Objects::Subreddit, String] to The
         #   thing to send a message to.
-        # @param subject [String] The subject of the message.
-        # @param text [String] The message text.
-        # @param captcha [String] A possible captcha result to send if one
+        # @param [String] subject The subject of the message.
+        # @param [String] text The message text.
+        # @param [String] captcha A possible captcha result to send if one
         #   is required.
-        # @param iden [String] The identifier for the captcha if one
+        # @param [String] iden The identifier for the captcha if one
         #   is required.
         def compose_message(to:, subject:, text:, captcha: nil, iden: nil)
           params = {api_type: "json", subject: subject, text: text}
@@ -33,7 +33,7 @@ module Redd
 
         # Mark a message as read.
         #
-        # @param message [Redd::Objects::PrivateMessage, String] The message
+        # @param [Redd::Objects::PrivateMessage, String] message The message
         #   to mark as read.
         def mark_as_read(message)
           fullname = get_property(message, :fullname)
@@ -42,7 +42,7 @@ module Redd
 
         # Mark a message as unread.
         #
-        # @param message [Redd::Objects::PrivateMessage, String] The message
+        # @param [Redd::Objects::PrivateMessage, String] message The message
         #   to mark as unread.
         def mark_as_unread(message)
           fullname = get_property(message, :fullname)
@@ -51,20 +51,21 @@ module Redd
 
         # Return a list of a user's private messages.
         #
-        # @param category [String] The category of messages to view.
-        # @param mark [Boolean] Whether to remove the orangered from the
-        #   user's inbox. 
-        # @param params [Hash] A list of params to send with the request.
-        # @option params [String] :after Return results after the given
-        #   fullname.
-        # @option params [String] :before Return results before the given
-        #   fullname.
-        # @option params [Integer] :count (0) The number of items already seen
-        #   in the listing.
-        # @option params [1..100] :limit (25) The maximum number of things to
-        #   return.
-        def messages(category = "inbox", mark = false, params = {})
-          params[:mark] = mark
+        # @param [String] category The category of messages to view.
+        # @param [Boolean] mark Whether to remove the orangered from the
+        #   user's inbox.
+        # @param [String] after Return results after the given fullname.
+        # @param [String] before Return results before the given fullname.
+        # @param [Integer] count The number of items already seen in the
+        #   listing.
+        # @param [1..100] limit The maximum number of things to return.
+        def messages(
+          category = "inbox", mark: false, after: nil, before: nil, count: 0,
+          limit: 25
+        )
+          params = {mark: mark, count: count, limit: limit}
+          params[:after] = after if after
+          params[:before] = before if before
           request_object :get, "/message/#{category}.json", params
         end
       end
