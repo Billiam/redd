@@ -29,7 +29,8 @@ module Redd
 
       # Helper method to require and include a mixin.
       # @param [Symbol] mixin_name A module to load.
-      def self.mixin(mixin_name)
+      # @see https://github.com/reddit/reddit/wiki/JSON
+      def self.is(mixin_name)
         camel_case = mixin_name.to_s.split("_").map(&:capitalize).join
         require_relative "base/#{mixin_name}"
         include Base.const_get(camel_case)

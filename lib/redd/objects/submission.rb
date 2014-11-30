@@ -4,6 +4,10 @@ module Redd
   module Objects
     # A submission made in a subreddit.
     class Submission < Thing
+      is :editable
+      is :saveable
+      is :votable
+
       alias_property :nsfw?, :over_18
       alias_property :self?, :is_self
       alias_property :comments_count, :num_comments
