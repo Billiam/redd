@@ -24,17 +24,16 @@ module Redd
 
       # Set up an unauthenticated connection to reddit.
       #
-      # @param [Hash] options A hash of options to connect using.
-      # @option options [#after_limit] :rate_limit The handler that takes care
-      #   of rate limiting.
-      # @option options [String] :user_agent The User-Agent string to use in the
-      #   header of every request.
-      # @option options [String] :api_endpoint The main domain to connect
-      #   to, in this case, the URL for reddit.
-      def initialize(options = {})
-        @rate_limit = options[:rate_limit] || RateLimit.new
-        @user_agent = options[:user_agent] || "Redd/Ruby, v#{Redd::VERSION}"
-        @api_endpoint = options[:api_endpoint] || "https://www.reddit.com/"
+      # @param [#after_limit] rate_limit The handler that takes care of rate
+      #   limiting.
+      # @param [String] user_agent The User-Agent string to use in the header
+      #   of every request.
+      # @param [String] api_endpoint The main domain to connect to, in this
+      #   case, the URL for reddit.
+      def initialize(rate_limit: nil, user_agent: nil, api_endpoint: nil)
+        @rate_limit = rate_limit || RateLimit.new
+        @user_agent = user_agent || "Redd/Ruby, v#{Redd::VERSION}"
+        @api_endpoint = api_endpoint || "https://www.reddit.com/"
       end
 
       private

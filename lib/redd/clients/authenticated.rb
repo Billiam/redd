@@ -27,10 +27,11 @@ module Redd
       #   header of every request.
       # @option options [String] :api_endpoint The main domain to connect to, in
       #   this case, the URL for reddit.
-      def initialize(cookie, modhash, options = {})
-        super(options)
+      # @see Client
+      def initialize(cookie, modhash, **kwargs)
         @cookie = cookie
         @modhash = modhash
+        super(**kwargs)
       end
 
       private
