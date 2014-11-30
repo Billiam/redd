@@ -54,7 +54,7 @@ module Redd
         #   comment to.
         # @param [String] text The text to comment.
         def add_comment(thing, text)
-          fullname = get_property(thing, :id)
+          fullname = get_property(thing, :fullname)
           post "/api/comment", api_type: "json", text: text, thing_id: fullname
         end
         alias_method :reply, :add_comment
@@ -64,7 +64,7 @@ module Redd
         # @param [Redd::Object::Submission, Redd::Object::Comment, String]
         #   thing A thing to delete.
         def delete(thing)
-          fullname = get_property(thing)
+          fullname = get_property(thing, :fullname)
           post "/api/del", id: fullname
         end
 
@@ -74,7 +74,7 @@ module Redd
         #   A thing to delete.
         # @param [String] text The new text.
         def edit(thing, text)
-          fullname = get_property(thing, :id)
+          fullname = get_property(thing, :fullname)
           post(
             "/api/editusertext",
             api_type: "json",
@@ -86,28 +86,28 @@ module Redd
         # Hide a link from the logged-in user.
         # @param [Redd::Object::Submission, String] thing A link to hide.
         def hide(thing)
-          fullname = get_property(thing, :id)
+          fullname = get_property(thing, :fullname)
           post "/api/hide", id: fullname
         end
 
         # Unhide a previously hidden link.
         # @param [Redd::Object::Submission, String] thing A link to show.
         def unhide(thing)
-          fullname = get_property(thing, :id)
+          fullname = get_property(thing, :fullname)
           post "/api/unhide", id: fullname
         end
 
         # Mark a link as "NSFW" (Not Suitable For Work)
         # @param [Redd::Object::Submission, String] thing A link to mark.
         def mark_as_nsfw(thing)
-          fullname = get_property(thing, :id)
+          fullname = get_property(thing, :fullname)
           post "/api/marknsfw", id: fullname
         end
 
         # Remove the NSFW label from the link.
         # @param [Redd::Object::Submission, String] thing A link to mark.
         def unmark_as_nsfw(thing)
-          fullname = get_property(thing, :id)
+          fullname = get_property(thing, :fullname)
           post "/api/unmarknsfw", id: fullname
         end
         alias_method :mark_as_safe, :unmark_as_nsfw
@@ -116,7 +116,7 @@ module Redd
         # @param [Redd::Object::Submission, Redd::Object::Comment, String] thing
         #   A link to report.
         def report(thing)
-          fullname = get_property(thing, :id)
+          fullname = get_property(thing, :fullname)
           post "/api/report", id: fullname
         end
 
@@ -126,7 +126,7 @@ module Redd
         #   A link to save.
         # @param category [String] A category to save to (if gilded).
         def save(thing, category: nil)
-          fullname = get_property(thing, :id)
+          fullname = get_property(thing, :fullname)
           params = {id: fullname}
           params[:category] = category if category
           post "/api/save", params
@@ -137,7 +137,7 @@ module Redd
         # @param [Redd::Object::Submission, Redd::Object::Comment, String] thing
         #   A link to unsave.
         def unsave(thing)
-          fullname = get_property(thing, :id)
+          fullname = get_property(thing, :fullname)
           post "/api/unsave", id: fullname
         end
 
@@ -178,7 +178,7 @@ module Redd
         # @note Votes must be cast by humans only! Your script can proxy a
         #   user's actions, but it cannot decide what to vote.
         def vote(thing, direction)
-          fullname = get_property(thing, :id)
+          fullname = get_property(thing, :fullname)
           post "/api/vote", id: fullname, dir: direction
         end
       end

@@ -6,14 +6,14 @@ module Redd
         # Approve a submission.
         # @param thing [Redd::Object::Submission] The link to approve.
         def approve(thing)
-          fullname = extract_fullname(thing)
+          fullname = get_property(thing, :fullname)
           post "/api/approve", id: fullname
         end
 
         # Remove a submission.
         # @param thing [Redd::Object::Submission] The link to remove.
         def remove(thing)
-          fullname = extract_fullname(thing)
+          fullname = get_property(thing, :fullname)
           post "/api/remove", id: fullname
         end
 
@@ -25,7 +25,7 @@ module Redd
         # @param how [:yes, :no, :admin, :special] How to distinguish the
         #   thing.
         def distinguish(thing, how = :yes)
-          fullname = extract_fullname(thing)
+          fullname = get_property(thing, :fullname)
           post "/api/distinguish", api_type: "json", id: fullname, how: how
         end
 
@@ -64,7 +64,7 @@ module Redd
         # @param thing [Redd::Object::Submission, Redd::Object::Comment]
         #   The thing to stop getting reports on.
         def ignore_reports(thing)
-          fullname = extract_fullname(thing)
+          fullname = get_property(thing, :fullname)
           post "/api/ignore_reports", id: fullname
         end
 
@@ -72,7 +72,7 @@ module Redd
         # @param thing [Redd::Object::Submission, Redd::Object::Comment]
         #   The thing to start getting reports on.
         def unignore_reports(thing)
-          fullname = extract_fullname(thing)
+          fullname = get_property(thing, :fullname)
           post "/api/unignore_reports", id: fullname
         end
 
