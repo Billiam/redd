@@ -7,6 +7,8 @@ module Redd
       mixin :utilities
       mixin :account
       mixin :captcha
+      mixin :links_comments
+      mixin :subreddits
       mixin :users
     end
   end

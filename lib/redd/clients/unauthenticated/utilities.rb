@@ -13,6 +13,17 @@ module Redd
       module Utilities
         private
 
+        def get_property(object, property)
+          case object
+          when String
+            object
+          when Objects::Base
+            object.send(property)
+          else
+            object.to_s
+          end
+        end
+
         # @param [String] kind A kind in the format /t[1-5]/.
         # @return [Redd::Objects::Thing, Redd::Objects::Listing] The appropriate
         #   object for a given kind or Redd::Objects::Thing if nothing is found.
