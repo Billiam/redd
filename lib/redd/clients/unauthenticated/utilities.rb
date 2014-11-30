@@ -7,6 +7,7 @@ require_relative "../../objects/user"
 require_relative "../../objects/submission"
 require_relative "../../objects/private_message"
 require_relative "../../objects/subreddit"
+require_relative "../../objects/wiki_page"
 
 module Redd
   module Clients
@@ -40,6 +41,29 @@ module Redd
           end
         end
 
+        # Create an object instance with the correct attributes when given a
+        # body.
+        #
+        # @param [String] body A JSON hash.
+        # @return [Redd::Objects::Thing, Redd::Objects::Listing]
+        # rubocop:disable Metrics/MethodLength
+        def object_from_body(body)
+          return nil unless body.is_a?(Hash) && body.key?(:kind)
+          object = object_from_kind(body[:kind])
+
+          if object == Redd::Objects::Listing
+            object.new(
+              objects_from_listing(body),
+              before: body[:data][:before],
+              after: body[:data][:after]
+            )
+          else
+            contents = body[:data]
+            contents[:kind] = body[:kind]
+            object.new(contents)
+          end
+        end
+
         private
 
         def get_property(object, property)
@@ -59,7 +83,7 @@ module Redd
         def object_from_kind(kind)
           objects = {
             "Listing"  => Objects::Listing,
-            # "wikipage" =>  Objects::WikiPage,
+            "wikipage" =>  Objects::WikiPage,
             # "more"     => Objects::MoreComments,
             "t1"       => Objects::Comment,
             "t2"       => Objects::User,
@@ -74,29 +98,6 @@ module Redd
         def objects_from_listing(listing)
           listing[:data][:children].map do |child|
             object_from_body(child)
-          end
-        end
-
-        # Create an object instance with the correct attributes when given a
-        # body.
-        #
-        # @param [String] body A JSON hash.
-        # @return [Redd::Objects::Thing, Redd::Objects::Listing]
-        # rubocop:disable Metrics/MethodLength
-        def object_from_body(body)
-          return nil unless body.is_a?(Hash) && body.key?(:kind)
-          object = object_from_kind(body[:kind])
-
-          if object == Redd::Objects::Listing
-            object.new(
-              children: objects_from_listing(body),
-              before: body[:data][:before],
-              after: body[:data][:after]
-            )
-          else
-            contents = body[:data]
-            contents[:kind] = body[:kind]
-            object.new(contents)
           end
         end
 

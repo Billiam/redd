@@ -11,6 +11,7 @@ module Redd
       mixin :links_comments
       mixin :subreddits
       mixin :users
+      mixin :wiki
     end
   end
 end

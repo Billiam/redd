@@ -8,6 +8,7 @@ module Redd
       alias_property :nsfw?, :over18
       alias_property :users_online, :accounts_active
       alias_property :type, :subreddit_type
+      alias_property :times_gilded, :gilded
 
       def created
         @created ||= Time.at(self[:created_utc])

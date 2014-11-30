@@ -2,18 +2,8 @@ module Redd
   module Objects
     # A collection of reddit things.
     # @see https://www.reddit.com/dev/api#listings
-    class Listing
-      include Enumerable
-      extend Forwardable
-      def_delegators :@children, :[], :length, :size, :each, :map, :empty?
-
-      # @!attribute [r] children
-      # @return [Array] A list of things in the listing.
-      attr_reader :children
-
-      # @!attribute [r] kind
-      # @return ["listing"]
-      attr_reader :kind
+    class Listing < Array
+      KIND = "Listing".freeze
 
       # @!attribute [r] before
       # @return [String] The id of the object before the listing.
@@ -23,11 +13,17 @@ module Redd
       # @return [String] The id of the object after the listing.
       attr_reader :after
 
-      def initialize(children: [], before:, after:)
-        @kind = "Listing".freeze
-        @children = children
+      # @param [Array] children The contents of the array.
+      # @param [String] before
+      # @param [String] after
+      def initialize(children = [], before: nil, after: nil)
+        concat(children)
         @before = before
         @after = after
+      end
+
+      def kind
+        KIND
       end
     end
   end
