@@ -4,9 +4,11 @@ module Redd
       # Methods to location links and comments.
       module LinksComments
         # Get a listing of comments for a submission.
-        # @param [String] id the id of the submission (not the fullname!)
-        # @return [Redd::Objects::Listing] A listing of comments
-        def request_comments(id)
+        # @param [Redd::Objects::Submission, String] submission The submission
+        #   or the id (not fullname!)
+        # @return [Redd::Objects::Listing] A listing of comments.
+        def request_comments(submission)
+          id = get_property(submission, :id)
           body = get("/comments/#{id}.json")[1]
           object_from_body(body)
         end

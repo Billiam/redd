@@ -18,6 +18,6 @@ RSpec.describe Redd::Clients::Unauthenticated::Utilities do
       instance.push(5).push(6, 7, 8)
       expect(instance).to contain_exactly(6, 7, 8)
       expect(instance).to_not include(5)
-    end 
+    end
   end
 end

@@ -8,6 +8,7 @@ require_relative "../../objects/submission"
 require_relative "../../objects/private_message"
 require_relative "../../objects/subreddit"
 require_relative "../../objects/wiki_page"
+require_relative "../../objects/more_comments"
 
 module Redd
   module Clients
@@ -84,7 +85,7 @@ module Redd
           objects = {
             "Listing"  => Objects::Listing,
             "wikipage" =>  Objects::WikiPage,
-            # "more"     => Objects::MoreComments,
+            "more"     => Objects::MoreComments,
             "t1"       => Objects::Comment,
             "t2"       => Objects::User,
             "t3"       => Objects::Submission,
