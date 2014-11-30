@@ -3,7 +3,8 @@ module Redd
     class Unauthenticated
       # Methods to location links and comments.
       module LinksComments
-        # @option [Array<String>] id An array of fullnames.
+        # @option [String, Array<String>] id An array of fullnames or a single
+        #   one.
         # @option [String] url The url of a thing. If an id is also
         #   provided, the id will take precedence.
         # @return [Redd::Objects::Listing] Listing of the object or objects.
