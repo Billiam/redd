@@ -1,5 +1,4 @@
 require_relative "redd/version"
-require_relative "redd/clients/authenticated"
 require_relative "redd/clients/unauthenticated"
 
 # The main Redd module.
