@@ -5,6 +5,7 @@ module Redd
     # The authenticated client.
     class Authenticated < Unauthenticated
       mixin :account
+      mixin :private_messages
 
       # @!attribute [r] cookie
       # @return [String] The cookie used to store the current session.
