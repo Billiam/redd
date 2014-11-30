@@ -24,7 +24,7 @@ module Redd
         #   is required.
         def compose_message(to:, subject:, text:, captcha: nil, iden: nil)
           params = {api_type: "json", subject: subject, text: text}
-          params << {captcha: captcha, iden: identifier} if captcha
+          params << {captcha: captcha, iden: iden} if captcha
           params[:to] = get_property(to, :name) ||
                         get_property(to, :display_name)
 

@@ -5,6 +5,7 @@ module Redd
     # The unauthenticated client.
     class Unauthenticated < Client
       mixin :utilities
+
       mixin :account
       mixin :captcha
       mixin :links_comments

@@ -5,6 +5,7 @@ module Redd
     # The authenticated client.
     class Authenticated < Unauthenticated
       mixin :account
+      mixin :links_comments
       mixin :private_messages
 
       # @!attribute [r] cookie
