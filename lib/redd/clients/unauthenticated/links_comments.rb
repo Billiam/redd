@@ -19,8 +19,8 @@ module Redd
 
           object_from_response :get, "/api/info.json", params
         end
-        alias_method :get_info, :comment
-        alias_method :get_info, :submission
+        alias_method :comment, :get_info
+        alias_method :submission, :get_info
       end
     end
   end
