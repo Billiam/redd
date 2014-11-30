@@ -26,7 +26,7 @@ module Redd
           params = {
             api_type: "json", extension: "json", title: title,
             resubmit: resubmit, sendreplies: sendreplies
-            }
+          }
 
           params[:sr] = get_property(subreddit, :display_name)
 

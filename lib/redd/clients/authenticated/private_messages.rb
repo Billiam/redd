@@ -26,7 +26,7 @@ module Redd
           params = {api_type: "json", subject: subject, text: text}
           params << {captcha: captcha, iden: iden} if captcha
           params[:to] = get_property(to, :name) ||
-                        get_property(to, :display_name)
+            get_property(to, :display_name)
 
           post "/api/compose", params
         end

@@ -1,6 +1,7 @@
 module Redd
   module Clients
     class Unauthenticated
+      # Methods to location links and comments.
       module LinksComments
         # @option [Array<String>] id An array of fullnames.
         # @option [String] url The url of a thing. If an id is also
@@ -15,7 +16,7 @@ module Redd
           else
             params = {url: url}
           end
-           
+
           object_from_response :get, "/api/info.json", params
         end
         alias_method :get_info, :comment
