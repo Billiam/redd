@@ -10,7 +10,7 @@ module Redd
       end
 
       def process_response(env)
-        fail @error.new(env) if @error
+        fail @error.new(env), env[:body] if @error
       end
     end
   end
