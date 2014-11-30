@@ -10,14 +10,16 @@ module Redd
         #
         # @note Reddit does accept a subreddit, but with fullnames and urls, I
         #   assumed that was unnecessary.
-        def get_info(id: [], url: "")
-          if !id.empty?
+        def get_info(id: nil, url: nil)
+          if id.is_a?(String)
+            params = {id: id}
+          elsif id.is_a?(Array) && !id.empty?
             params = {id: id.join(",")}
           else
             params = {url: url}
           end
 
-          object_from_response :get, "/api/info.json", params
+          request_object :get, "/api/info.json", params
         end
         alias_method :comment, :get_info
         alias_method :submission, :get_info
