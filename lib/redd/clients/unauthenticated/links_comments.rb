@@ -3,9 +3,19 @@ module Redd
     class Unauthenticated
       # Methods to location links and comments.
       module LinksComments
-        # @option [String, Array<String>] id An array of fullnames or a single
+        # Get a listing of comments for a submission.
+        # @param [String] id the id of the submission (not the fullname!)
+        # @return [Redd::Objects::Listing] A listing of comments
+        def request_comments(id)
+          body = get("/comments/#{id}.json")[1]
+          object_from_body(body)
+        end
+
+        # Get a listing of objects based on their fullnames or url.
+        #
+        # @param [String, Array<String>] id An array of fullnames or a single
         #   one.
-        # @option [String] url The url of a thing. If an id is also
+        # @param [String] url The url of a thing. If an id is also
         #   provided, the id will take precedence.
         # @return [Redd::Objects::Listing] Listing of the object or objects.
         #
@@ -22,8 +32,14 @@ module Redd
 
           request_object :get, "/api/info.json", params
         end
-        alias_method :comment, :get_info
-        alias_method :submission, :get_info
+
+        # Get a listing of objects based on their ids. Prefer {#get_info}.
+        # @param [Array<String>] *ids
+        # @return [Redd::Objects::Listing] Listing of the object or objects.
+        # @see #get_info
+        def by_id(*ids)
+          get_info(id: ids)
+        end
       end
     end
   end
