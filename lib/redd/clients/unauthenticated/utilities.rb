@@ -27,9 +27,16 @@ module Redd
             super(enum, &block)
           end
 
-          def push(item)
-            remove(@fifo.shift) if size >= @limit
-            @fifo.push(item) if add?(item)
+          def push(*items)
+            items.each do |item|
+              delete(@fifo.shift) if size >= @limit
+              @fifo.push(item) if add?(item)
+            end
+            self
+          end
+
+          def to_a
+            @fifo
           end
         end
 
