@@ -8,7 +8,11 @@ module Redd
       dependency "multi_json"
 
       define_parser do |body|
-        MultiJson.load(body, symbolize_keys: true)
+        begin
+          MultiJson.load(body, symbolize_keys: true)
+        rescue MultiJson::ParseError
+          body
+        end
       end
 
       def parse_response?(env)
