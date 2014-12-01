@@ -4,6 +4,8 @@ module Redd
   module Objects
     # The model for private messages
     class PrivateMessage < Thing
+      is :inboxable
+
       alias_property :from, :author
       alias_property :to, :dest
 

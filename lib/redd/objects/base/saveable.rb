@@ -1,6 +1,7 @@
 module Redd
   module Objects
     class Base
+      # An item that can be saved.
       module Saveable
         # Save the item.
         def save(category: nil)

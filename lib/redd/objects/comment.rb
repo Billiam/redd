@@ -5,6 +5,7 @@ module Redd
     # A comment that can be made on a link.
     class Comment < Thing
       is :editable
+      is :inboxable
       is :saveable
       is :votable
 

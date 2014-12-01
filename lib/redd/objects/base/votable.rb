@@ -1,6 +1,7 @@
 module Redd
   module Objects
     class Base
+      # An item that can be voted upon
       module Votable
         # Upvote the item.
         def upvote

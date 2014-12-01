@@ -1,6 +1,7 @@
 module Redd
   module Objects
     class Base
+      # An item that can be edited.
       module Editable
         # Edit the item.
         def edit(text)
