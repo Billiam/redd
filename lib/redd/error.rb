@@ -52,7 +52,7 @@ module Redd
       end
 
       def parse_error(body)
-        return nil unless body.is_a?(Hash)
+        return body unless body.is_a?(Hash)
 
         if body.key?(:json) && body[:json].key?(:errors)
           body[:json][:errors].first
