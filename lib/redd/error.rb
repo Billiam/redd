@@ -117,11 +117,13 @@ module Redd
 
     # Raised when the client needs to wait before making another request
     class RateLimited < Error
+      # @!attribute [r] time
+      # @return [Integer] The seconds to wait before making another request.
       attr_reader :time
 
-      def initialize(env, time)
+      def initialize(env)
+        @time = env[:body][:json][:ratelimit]
         super(env)
-        @time = time
       end
     end
   end

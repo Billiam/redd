@@ -1,3 +1,5 @@
+include_relative "error"
+
 module Redd
   # The class that handles rate limiting for reddit. reddit does supply
   # X-Ratelimit headers but only when logged in and using those headers instead
@@ -47,8 +49,13 @@ module Redd
       sleep(wait_time) if wait_time > 0
       response = yield
       @last_request_time = Time.now
-
       response
+    rescue Redd::Error::RateLimited => error
+      warn(
+        "You have been rate-limited for #{error.time} seconds. " +
+        "You might have multiple bots running on the same server!"
+      )
+      sleep(error.time)
     end
   end
 end
