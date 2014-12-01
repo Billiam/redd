@@ -5,11 +5,17 @@ require_relative "../version"
 require_relative "../error"
 require_relative "../rate_limit"
 
+require_relative "client/utilities"
+require_relative "client/account"
+
 module Redd
   # The possible clients that can be used.
   module Clients
     # The basic client to inherit from.
     class Client
+      include Utilities
+      include Account
+
       # @!attribute [rw] api_endpoint
       # @return [String] The site to connect to.
       attr_accessor :api_endpoint

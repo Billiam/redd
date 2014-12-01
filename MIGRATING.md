@@ -12,6 +12,7 @@ Main changes include:
 
 * Keyword arguments for some methods.
 * Objects no longer have predefined properties.
+* Listings are just arrays on steroids and Objects are just hashes on steroids.
 * A new DSL module that can be used like so:
 
   ```ruby

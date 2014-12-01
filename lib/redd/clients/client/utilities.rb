@@ -12,59 +12,9 @@ require_relative "../../objects/more_comments"
 
 module Redd
   module Clients
-    class Unauthenticated
+    class Client
       # Non-API methods that make life easier.
       module Utilities
-        # A set which removes the first inserted element when the maximum is
-        # reached. This one totally implements the set interface.
-        #
-        # Similar to PRAW's implementation. (GPL license)
-        # @see http://git.io/uA8RVw
-        class BoundedOrderedSet < Set
-          attr_reader :limit
-
-          def initialize(limit = 10, enum = nil, &block)
-            @limit = limit
-            @fifo  = []
-            super(enum, &block)
-          end
-
-          def push(*items)
-            items.each do |item|
-              delete(@fifo.shift) if size >= @limit
-              @fifo.push(item) if add?(item)
-            end
-            self
-          end
-
-          def to_a
-            @fifo
-          end
-        end
-
-        # Create an object instance with the correct attributes when given a
-        # body.
-        #
-        # @param [String] body A JSON hash.
-        # @return [Redd::Objects::Thing, Redd::Objects::Listing]
-        # rubocop:disable Metrics/MethodLength
-        def object_from_body(body)
-          return nil unless body.is_a?(Hash) && body.key?(:kind)
-          object = object_from_kind(body[:kind])
-
-          if object == Redd::Objects::Listing
-            object.new(
-              objects_from_listing(body),
-              before: body[:data][:before],
-              after: body[:data][:after]
-            )
-          else
-            property = body[:data]
-            property[:kind] = body[:kind]
-            object.new(property, self)
-          end
-        end
-
         private
 
         def get_property(object, property)
@@ -99,6 +49,29 @@ module Redd
         def objects_from_listing(listing)
           listing[:data][:children].map do |child|
             object_from_body(child)
+          end
+        end
+
+        # Create an object instance with the correct attributes when given a
+        # body.
+        #
+        # @param [String] body A JSON hash.
+        # @return [Redd::Objects::Thing, Redd::Objects::Listing]
+        # rubocop:disable Metrics/MethodLength
+        def object_from_body(body)
+          return nil unless body.is_a?(Hash) && body.key?(:kind)
+          object = object_from_kind(body[:kind])
+
+          if object == Redd::Objects::Listing
+            object.new(
+              objects_from_listing(body),
+              before: body[:data][:before],
+              after: body[:data][:after]
+            )
+          else
+            property = body[:data]
+            property[:kind] = body[:kind]
+            object.new(property, self)
           end
         end
 
