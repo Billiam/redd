@@ -123,7 +123,7 @@ module Redd
 
       def initialize(env)
         @time = env[:body][:json][:ratelimit]
-        super(env)
+        super
       end
     end
   end
