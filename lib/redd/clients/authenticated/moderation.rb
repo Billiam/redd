@@ -1,5 +1,5 @@
 module Redd
-  module Client
+  module Clients
     class Authenticated
       # Methods for moderating subreddits
       module Moderation
