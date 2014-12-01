@@ -1,4 +1,4 @@
-include_relative "error"
+require_relative "error"
 
 module Redd
   # The class that handles rate limiting for reddit. reddit does supply
@@ -47,12 +47,11 @@ module Redd
     def after_limit
       wait_time = @last_request_time + @gap - Time.now
       sleep(wait_time) if wait_time > 0
-      response = yield
       @last_request_time = Time.now
-      response
+      yield
     rescue Redd::Error::RateLimited => error
       warn(
-        "You have been rate-limited for #{error.time} seconds. " +
+        "You have been rate-limited for #{error.time} seconds. " \
         "You might have multiple bots running on the same server!"
       )
       sleep(error.time)
