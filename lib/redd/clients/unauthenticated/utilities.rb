@@ -1,5 +1,3 @@
-require "set"
-
 require_relative "../../objects/base"
 require_relative "../../objects/listing"
 require_relative "../../objects/comment"
@@ -12,7 +10,7 @@ require_relative "../../objects/more_comments"
 
 module Redd
   module Clients
-    class Client
+    class Unauthenticated
       # Non-API methods that make life easier.
       module Utilities
         private
@@ -34,7 +32,7 @@ module Redd
         def object_from_kind(kind)
           objects = {
             "Listing"  => Objects::Listing,
-            "wikipage" =>  Objects::WikiPage,
+            "wikipage" => Objects::WikiPage,
             "more"     => Objects::MoreComments,
             "t1"       => Objects::Comment,
             "t2"       => Objects::User,

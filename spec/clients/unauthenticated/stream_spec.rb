@@ -1,6 +1,6 @@
-RSpec.describe Redd::Clients::Unauthenticated::Utilities do
+RSpec.describe Redd::Clients::Unauthenticated::Stream do
   describe "::BoundedOrderedSet" do
-    let(:bset) { Redd::Clients::Unauthenticated::Utilities::BoundedOrderedSet }
+    let(:bset) { Redd::Clients::Unauthenticated::Stream::BoundedOrderedSet }
 
     it "has the correct limit" do
       instance = bset.new(3)

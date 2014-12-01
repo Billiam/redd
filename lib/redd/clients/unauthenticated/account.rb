@@ -2,7 +2,7 @@ require_relative "../authenticated"
 
 module Redd
   module Clients
-    class Client
+    class Unauthenticated
       # Method to login.
       module Account
         # Return the modhash and cookie of the user.

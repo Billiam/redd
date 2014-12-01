@@ -1,3 +1,5 @@
+require "set"
+
 module Redd
   module Clients
     class Unauthenticated
