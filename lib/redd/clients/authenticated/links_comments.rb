@@ -96,6 +96,7 @@ module Redd
           fullname = get_property(thing, :fullname)
           post "/api/unhide", id: fullname
         end
+        alias_method :show, :unhide
 
         # Mark a link as "NSFW" (Not Suitable For Work)
         # @param [Redd::Object::Submission, String] thing A link to mark.

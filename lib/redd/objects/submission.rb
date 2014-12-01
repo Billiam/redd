@@ -5,6 +5,7 @@ module Redd
     # A submission made in a subreddit.
     class Submission < Thing
       is :editable
+      is :hideable
       is :saveable
       is :votable
 
