@@ -67,9 +67,9 @@ module Redd
               after: body[:data][:after]
             )
           else
-            property = body[:data]
-            property[:kind] = body[:kind]
-            object.new(property, self)
+            properties = body[:data]
+            properties[:kind] = body[:kind]
+            object.new(self, property)
           end
         end
 

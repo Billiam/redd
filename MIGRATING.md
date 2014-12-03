@@ -13,7 +13,7 @@ Main changes include:
 * Keyword arguments for some methods.
 * Objects no longer have predefined properties.
 * Listings are just arrays on steroids and Objects are just hashes on steroids.
-* A new DSL module that can be used like so:
+* **`(in progress)`** A new DSL module that can be used like so:
 
   ```ruby
   require "redd/dsl"
@@ -21,6 +21,19 @@ Main changes include:
 
   puts client.user_agent
   login("Mustermind", "hunter2") unless logged_in?
+  ```
+* **`(in progress)`** Moving all methods from the client to the respective
+  objects, sorta similar to Rails' models. This will be helpful in cleaning up
+  the large sets of methods in the client folders and the base folder.
+  
+  ```ruby
+  # previously:
+  r = Redd::Client::Unauthenticated.new
+  r.get_user_submitted("Mustermind")
+
+  # now
+  r = Redd.it
+  r.user(name: "Mustermind").get_submitted
   ```
 * A new CLI for creating bots quickly.
 
