@@ -36,7 +36,7 @@ module Redd
           submission_stream(:comments, *args, &block)
         end
 
-        def submission_stream(listing, subreddit = nil, params = {})
+        def submission_stream(listing = :new, subreddit = nil, params = {})
           set = BoundedOrderedSet.new
 
           loop do
