@@ -1,6 +1,6 @@
 RSpec.describe Redd::Clients::Unauthenticated::Stream do
   describe "::BoundedOrderedSet" do
-    let(:bset) { Redd::Clients::Unauthenticated::Stream::BoundedOrderedSet }
+    let(:bset) { Redd::Clients::Unauthenticated::Stream::QueueSet }
 
     it "has the correct limit" do
       instance = bset.new(3)
