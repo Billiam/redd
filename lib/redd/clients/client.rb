@@ -36,6 +36,22 @@ module Redd
         @api_endpoint = api_endpoint || "https://www.reddit.com/"
       end
 
+      # @!method get
+      # @!method post
+      # @!method put
+      # @!method delete
+      #
+      # Sends the request to the given path with the given params and return
+      # the body of the response.
+      # @param path
+      # @param params
+      # @see #request
+      [:get, :post, :put, :delete].each do |meth|
+        define_method(meth) do |path, params = nil|
+          request(meth, path, params).body
+        end
+      end
+
       private
 
       # @return [Hash{String => String}] A hash of headers.
@@ -73,22 +89,6 @@ module Redd
       def request(method, path, params = nil)
         @rate_limit.after_limit do
           connection.send(method.to_sym, path, params)
-        end
-      end
-
-      # @!method get
-      # @!method post
-      # @!method put
-      # @!method delete
-      #
-      # Sends the request to the given path with the given params and return
-      # the body of the response.
-      # @param path
-      # @param params
-      # @see #request
-      [:get, :post, :put, :delete].each do |meth|
-        define_method(meth) do |path, params = nil|
-          request(meth, path, params).body
         end
       end
 
