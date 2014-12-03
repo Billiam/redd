@@ -69,7 +69,7 @@ module Redd
           else
             properties = body[:data]
             properties[:kind] = body[:kind]
-            object.new(self, property)
+            object.new(self, properties)
           end
         end
 
