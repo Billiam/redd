@@ -10,7 +10,7 @@ module Redd
         #
         # Similar to PRAW's implementation. (GPL license)
         # @see http://git.io/uA8RVw
-        class BoundedOrderedSet < Set
+        class QueueSet < Set
           attr_reader :limit
 
           def initialize(limit = 10, enum = nil, &block)
@@ -37,7 +37,7 @@ module Redd
         end
 
         def submission_stream(listing = :new, subreddit = nil, params = {})
-          set = BoundedOrderedSet.new
+          set = QueueSet.new
 
           loop do
             # Get the latest comments from the subreddit. By the way, this line
